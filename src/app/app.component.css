@@ -1,0 +1,12 @@
+.ng-valid:not(form).ng-touched,
+.ng-valid:not(form).required.ng-touched {
+  background-color: lightgreen;
+}
+
+.ng-invalid:not(form).ng-touched {
+  background-color: lightcoral;
+}
+
+.error-message {
+  color: red;
+}

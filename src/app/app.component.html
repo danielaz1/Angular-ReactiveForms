@@ -1,20 +1,99 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<form [formGroup]="registeredUser" (ngSubmit)="onSubmit()">
+  <label class="control-label required" for="name" > Imię: </label>
+  <input type="text" name="" id="name" formControlName="name">
+  <div *ngFor="let validation of account_validation_messages.name">
+    <div class="error-message" *ngIf="registeredUser.get('name').hasError(validation.type) && (registeredUser.get('name').dirty || registeredUser.get('name').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="surname"> Nazwisko: </label>
+  <input type="text" name="" id="surname" formControlName="surname">
+  <div *ngFor="let validation of account_validation_messages.surname">
+    <div class="error-message" *ngIf="registeredUser.get('surname').hasError(validation.type) && (registeredUser.get('surname').dirty || registeredUser.get('surname').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="email"> E-mail: </label>
+  <input type="text" name="" id="email" formControlName="email">
+  <div *ngFor="let validation of account_validation_messages.email">
+    <div class="error-message" *ngIf="registeredUser.get('email').hasError(validation.type) && (registeredUser.get('email').dirty || registeredUser.get('email').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="phone"> Telefon: </label>
+  <input type="text" name="" id="phone" formControlName="phone">
+  <div *ngFor="let validation of account_validation_messages.phone">
+    <div class="error-message" *ngIf="registeredUser.get('phone').hasError(validation.type) && (registeredUser.get('phone').dirty || registeredUser.get('phone').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="password"> Hasło: </label>
+  <input type="password" name="" id="password" formControlName="password"> 
+  <div *ngFor="let validation of account_validation_messages.password">
+    <div class="error-message" *ngIf="registeredUser.get('password').hasError(validation.type) && (registeredUser.get('password').dirty || registeredUser.get('password').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="confirmPassword"> Potwierdź hasło: </label>
+  <input type="password" name="" id="confirmPassword" formControlName="confirmPassword"> <br/>
+  <label for="confirmPassword">
+  <div *ngFor="let validation of account_validation_messages.confirmPassword">
+          <div class="error-message" *ngIf="registeredUser.get('confirmPassword').hasError(validation.type) && (registeredUser.get('confirmPassword').dirty || registeredUser.get('confirmPassword').touched)">{{validation.message}}</div>
+  </div> <br/>
+  <div *ngIf="registeredUser.controls['confirmPassword'].hasError('NoPassswordMatch')" > 
+      <div class="error-message"> Podane hasła muszą być takie same </div>
+  </div> 
+</label> <br/>
+
+  <label for="pet"> Zwierzę: </label> <br>
+  <label><input type="radio" name="pet" value="cat" formControlName="pet"> Cat </label>  <br>
+<label><input type="radio" name="pet" value="dog" formControlName="pet"> Dog </label>  <br>
+<label><input type="radio" name="pet" value="other" formControlName="pet"> Other </label> <br>
+<div *ngFor="let validation of account_validation_messages.pet">
+    <div class="error-message" *ngIf="registeredUser.get('pet').hasError(validation.type) && (registeredUser.get('pet').dirty || registeredUser.get('pet').touched)">{{validation.message}}</div>
+</div> <br/>
+<br>
+  <p>Adres</p>
+  <fieldset formGroupName="address">
+  <label for="city"> Miasto: </label>
+  <input type="text" name="" id="city" formControlName="city">
+  <div *ngFor="let validation of account_validation_messages.city">
+      <div class="error-message" *ngIf="registeredUser.get('address').get('city').hasError(validation.type) && (registeredUser.get('address').get('city').dirty || registeredUser.get('address').get('city').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="street"> Ulica: </label>
+  <input type="text" name="" id="street" formControlName="street">
+  <div *ngFor="let validation of account_validation_messages.street">
+      <div class="error-message" *ngIf="registeredUser.get('address').get('street').hasError(validation.type) && (registeredUser.get('address').get('street').dirty || registeredUser.get('address').get('street').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="building"> Nr domu: </label>
+  <input type="text" name="" id="building" formControlName="building">
+  <div *ngFor="let validation of account_validation_messages.street">
+      <div class="error-message" *ngIf="registeredUser.get('address').get('building').hasError(validation.type) && (registeredUser.get('address').get('building').dirty || registeredUser.get('address').get('building').touched)">{{validation.message}}</div>
+  </div> <br/>
+
+  <label for="flatNo"> Nr mieszkania: </label>
+  <input type="text" name="" id="flatNo" formControlName="flatNo">
+  </fieldset>
+
+  <br>
+  <p>Zgody</p>
+  <fieldset formGroupName="consents">
+    <label for="newsletter" class="control-label required"> Zgoda na otrzymywanie wiadomości e-mail </label>
+    <input type="checkbox" name="" id="newsletter" formControlName="newsletter" ngModel required> <br>
+    <div *ngFor="let validation of account_validation_messages.newsletter">
+        <div class="error-message" *ngIf="registeredUser.get('consents').get('newsletter').hasError(validation.type) &&  registeredUser.get('consents').get('newsletter').touched">{{validation.message}}</div>
+    </div> <br/>
+
+
+    <div *ngIf="registeredUser.get('phone').valid && (registeredUser.get('phone').dirty)">
+    <label for="sms"> Zgoda na otrzymywanie wiadomości SMS </label>
+    <input type="checkbox" name="" id="sms" formControlName="sms">
+  </div>
+    </fieldset>
+  
+  <button type="submit" (click)="onSubmit()">Submit</button>
+
+</form>
+
+<pre>{{registeredUser.value | json}}</pre>
+
+
 
