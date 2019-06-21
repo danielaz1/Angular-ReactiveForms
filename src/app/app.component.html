@@ -77,11 +77,10 @@
   <p>Zgody</p>
   <fieldset formGroupName="consents">
     <label for="newsletter" class="control-label required"> Zgoda na otrzymywanie wiadomości e-mail </label>
-    <input type="checkbox" name="" id="newsletter" formControlName="newsletter" ngModel required> <br>
+    <input type="checkbox" name="" id="newsletter" formControlName="newsletter"> <br>
     <div *ngFor="let validation of account_validation_messages.newsletter">
         <div class="error-message" *ngIf="registeredUser.get('consents').get('newsletter').hasError(validation.type) &&  registeredUser.get('consents').get('newsletter').touched">{{validation.message}}</div>
     </div> <br/>
-
 
     <div *ngIf="registeredUser.get('phone').valid && (registeredUser.get('phone').dirty)">
     <label for="sms"> Zgoda na otrzymywanie wiadomości SMS </label>
@@ -89,7 +88,7 @@
   </div>
     </fieldset>
   
-  <button type="submit" (click)="onSubmit()">Submit</button>
+  <button type="submit">Submit</button>
 
 </form>
 

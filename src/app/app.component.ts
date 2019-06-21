@@ -48,12 +48,9 @@ export class AppComponent {
     });
    }
 
-  get name() { return this.registeredUser.get('name'); }
-  get email() { return this.registeredUser.get('email'); }
-
   onSubmit() {
-    this.cleanForm(this.registeredUser);
     if (this.registeredUser.valid) {
+      this.cleanForm(this.registeredUser);
       console.table(this.registeredUser);
     }  else {
       this.validateAllFormFields(this.registeredUser);
@@ -75,7 +72,10 @@ export class AppComponent {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
       if (control instanceof FormControl) {
-        control.setValue(formGroup.get(field).value.toString().trim());
+        let fieldValue = formGroup.get(field).value;
+        if (typeof fieldValue === 'string' || fieldValue instanceof String) {
+          control.setValue(fieldValue.toString().trim());
+        }
       } else if (control instanceof FormGroup) {
         this.cleanForm(control);
       }

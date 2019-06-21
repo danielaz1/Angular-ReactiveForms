@@ -61,7 +61,7 @@ export class CustomValidators {
             { type: 'required', message: 'Nr budynku jest wymagany' }
           ],
           newsletter: [
-            { type: 'requiredTrue', message: 'Zgoda na newsletter jest wymagana' }
+            { type: 'required', message: 'Zgoda na newsletter jest wymagana' }
           ],
         };
     }
